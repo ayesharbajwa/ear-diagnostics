@@ -48,7 +48,7 @@ def read_image(inputFile):
 def save_image(numpyArray, outputFile):
 	"""Given a numpy array representing an RGB image, saves to image file"""
 	#Use PIL conversion to Image type
-	img = PIL.Image.fromarray(np.uint8(numpyArray))
+	img = PIL.Image.fromarray(np.uint8(numpyArray*255))
 	#Use object method to save
 	img.save(outputFile)
 	return;
