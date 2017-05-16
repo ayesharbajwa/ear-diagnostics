@@ -3,8 +3,9 @@ import cv2
 import matplotlib.pylab as plt
 import math
 import cmath
+import os
 from matplotlib import cm
-from mpl_toolkits.mplot3d.axes3d import Axes3D
+#from mpl_toolkits.mplot3d.axes3d import Axes3D
 
 eps = np.finfo(float).eps
 i=cmath.sqrt(-1)
@@ -35,9 +36,11 @@ def tilt_calc():
 	avy=np.sum(ngrady)/np.size(ngrady)
 	return math.atan(avy/avx)
 	
-	
-	
-img=cv2.imread('tm.jpg',0)
+print('Available files:')	
+os.system('cd shading_images ; ls')
+print('Input file:')
+filename='./shading_images/{}'.format(input())
+img=cv2.imread(filename,0)
 img = img.astype(np.float32, copy=False)
 img=img/np.amax(img)
 height=np.shape(img)[1]
