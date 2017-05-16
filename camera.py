@@ -28,7 +28,7 @@ while(True):
 			
 		if(a==99):
 			saving=get_image()
-			file = "/home/madhielango/GM1/saved_images/image{}.png".format(current_time())
+			file = "./saved_images/image{}.png".format(current_time())
 			cv2.imwrite(file, get_image())
 			print("")
 			print("Image Captured")	
