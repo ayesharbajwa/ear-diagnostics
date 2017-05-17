@@ -69,49 +69,82 @@ def line_center(tm,rho, theta):
         return 0
     lower=(rho-tm.height*np.sin(theta)/3)/(np.cos(theta))
     upper=(rho-2*tm.height*np.sin(theta)/3)/(np.cos(theta))
-    print (lower,upper)    
+    #print (lower,upper)    
     if(upper<lower):
             lower,upper=upper,lower
     lower_c=tm.width/3
     upper_c=tm.width*2/3
-    print (lower_c,upper_c)  
+    #print (lower_c,upper_c)  
     if(lower<upper_c and lower_c<upper):
         return 1
     else:
         return 0
-    
-filename='./test_images/test_ear_segmented.png'
-filename2='./test_images/download.jpg' 
-filename3='./ear_images/normalTympanic3.jpg'   
-tm=Image(cv2.imread(filename2))
-#img_display(tm.edges())
-thresholds=[]
-nol=[]
-for i in range(400):    
-    lines = cv2.HoughLines(tm.edges(i),1,np.pi/180,100)
-    thresholds.append(i+1)
-    try:    
-        nol.append(np.shape(lines)[0])
+        
+def valid_line_counter(edge_limit,line_limit,tm):
+    lines = cv2.HoughLines(tm.edges(edge_limit),1,np.pi/180,line_limit)
+    ans=0
+    try:
+        for i in range(np.shape(lines)[0]):
+            for rho,theta in lines[i]:
+                if(line_center(tm,rho, theta)==1):
+                    ans+=1
     except IndexError:
-        nol.append('0')
-plt.figure()
-plt.plot(thresholds,nol)
-plt.show()
+        return 0
+    return ans
+
+
+filename3='./test_images/test_ear_segmented.png'
+filename2='./test_images/download.jpg' 
+filename='normalTympanic2'   
+tm=Image(cv2.imread('./ear_images/{}.jpg'.format(filename)))
+
+minimum=5000
+
+min_tuples=[]
+i=30
+while(True):
+    b=valid_line_counter(i,i,tm)
+    print(b)
+    i+=1
+    if(b<100):
+        break
+    
+print(b)
+min_e=i-2
+min_l=i
+minimum=100
+for e in np.arange(i,i+50,2):
+    print(e)
+    if(min_e!=e-2):
+        break
+    for l in np.arange(i,i+30):
+        a=valid_line_counter(e,l,tm)
+        if(a<=minimum and a>0):
+            minimum=a
+            print(minimum)
+            min_e=e
+            min_l=l
+            min_tuples.append((e,l))
+#            lines = cv2.HoughLines(tm.edges(min_e),1,np.pi/180,min_l)
+#            cimg=draw_lines_polar(tm.img,lines)
+#            #ImageNumpyFormat = np.asarray(ImageItself)
+#            plt.imshow(cimg)
+#            plt.draw()
+#            plt.pause(1) # pause how many seconds
+#            plt.close()
+        #if (a==1):
+            #break
+
+img_display(tm.edges(min_e))            
+        
+lines = cv2.HoughLines(tm.edges(min_e),1,np.pi/180,min_l)
 cimg=draw_lines_polar(tm.img,lines)
-cv2.imwrite('houghlines.jpg',cimg)
+savename='./saved_images/{}_malleus.png'.format(filename)
+cv2.imwrite(savename,cimg)
 
-#img_display(tm.equal())
-
-#img_display(image_cluster(tm.img,6))
-#minLineLength = 100
-#maxLineGap = 10
-#linesP = cv2.HoughLinesP(tm.edges(),1,np.pi/180,20,minLineLength,maxLineGap)
-#print (np.shape(linesP)[0])
-#cimgP=draw_lines_cart(tm.img,linesP)
-#cv2.imwrite('houghlinesP.jpg',cimgP)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-    
+
         
