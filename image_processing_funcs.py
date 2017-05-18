@@ -24,6 +24,8 @@ def main():
 
 #TODO
 def segment_tympanic_membrane(filename):
+	"""Given image input containing tympanic membrane, segments by masking
+	to show only membrane and displays/saves masked image."""
 	orig = read_image(filename)
 
 	#make grayscale
