@@ -95,7 +95,7 @@ def valid_line_counter(edge_limit,line_limit,tm):
 
 filename3='./test_images/test_ear_segmented.png'
 filename2='./test_images/download.jpg' 
-filename='normalTympanic2'   
+filename='normalTympanic3'   
 tm=Image(cv2.imread('./ear_images/{}.jpg'.format(filename)))
 
 minimum=5000
