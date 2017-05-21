@@ -25,11 +25,11 @@ def main():
 	#segment_tympanic_membrane('./normal_ear_images/NORMAL4.jpg') #probably getting stuck on circle, no output
 	#segment_tympanic_membrane('./normal_ear_images/NORMAL5.jpg') #probably getting stuck on circle, no output
 	#segment_tympanic_membrane('./normal_ear_images/NORMAL6.jpg')
-	segment_tympanic_membrane('./normal_ear_images/NORMAL7.jpg') # bad - edge stuck?
+	#segment_tympanic_membrane('./normal_ear_images/NORMAL7.jpg') # bad - edge stuck?
 	#segment_tympanic_membrane('./normal_ear_images/NORMAL8.jpg')
 	segment_tympanic_membrane('./normal_ear_images/NORMAL8-1.jpg')
 	segment_tympanic_membrane('./normal_ear_images/NORMAL9-1.jpg')
-	segment_tympanic_membrane('./normal_ear_images/NORMAL9.jpg')
+	#segment_tympanic_membrane('./normal_ear_images/NORMAL9.jpg')
 	#segment_tympanic_membrane('./normal_ear_images/NORMAL10.jpg') - too big
 	segment_tympanic_membrane('./normal_ear_images/NORMAL11.jpg') #handles okay
 	segment_tympanic_membrane('./normal_ear_images/NORMAL12.jpg') #handles well
@@ -38,9 +38,9 @@ def main():
 	segment_tympanic_membrane('./normal_ear_images/NORMAL15.jpg')
 	#segment_tympanic_membrane('./normal_ear_images/NORMAL16.jpg') # black
 	# segment_tympanic_membrane('./normal_ear_images/NORMAL17.jpg') # black
-	segment_tympanic_membrane('./normal_ear_images/NORMAL18.jpg') # WAY off
-	segment_tympanic_membrane('./normal_ear_images/NORMAL19.jpg') # not close ehough
-	segment_tympanic_membrane('./normal_ear_images/NORMAL20.jpg')
+	#segment_tympanic_membrane('./normal_ear_images/NORMAL18.jpg') # WAY off
+	#segment_tympanic_membrane('./normal_ear_images/NORMAL19.jpg') # not close ehough
+	#segment_tympanic_membrane('./normal_ear_images/NORMAL20.jpg')
 	#segment_tympanic_membrane('./normal_ear_images/NORMAL27.jpg')
 
 
@@ -88,12 +88,12 @@ def segment_tympanic_membrane(filename):
 
 	mask_outside_polygon(coords)
 	
-	#ax.set_xticks([]), ax.set_yticks([])
+	ax.set_xticks([]), ax.set_yticks([])
 	ax.axis([0, orig.shape[1], orig.shape[0], 0])
 
 	ax.imshow(orig)
 	plt.show()
-	#fig.savefig(filename + '_segmented.jpg')
+	fig.savefig(filename + '_segmented.jpg')
 
 	return;
 
