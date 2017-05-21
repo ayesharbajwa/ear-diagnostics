@@ -1,6 +1,7 @@
 import numpy as np
 import cv2
 import matplotlib.pylab as plt
+from tqdm import tqdm
 
 class Image(object):
     
@@ -51,7 +52,7 @@ def draw_lines_polar(img,lines):
                 y1 = int(y0 + 1000*(a))
                 x2 = int(x0 - 1000*(-b))
                 y2 = int(y0 - 1000*(a))
-                cimg=cv2.line(cimg,(x1,y1),(x2,y2),(0,0,255),2)
+                cimg=cv2.line(cimg,(x1,y1),(x2,y2),(0,0,255),8)
     return cimg
 
 def image_cluster(img,K):
@@ -92,59 +93,51 @@ def valid_line_counter(edge_limit,line_limit,tm):
         return 0
     return ans
 
+def malleus_presence(img_number):
+	
+	tm=Image(cv2.imread('./ear_normal/NORMAL{}.jpg'.format(img_number)))
 
-filename3='./test_images/test_ear_segmented.png'
-filename2='./test_images/download.jpg' 
-filename='normalTympanic3'   
-tm=Image(cv2.imread('./ear_images/{}.jpg'.format(filename)))
+	minimum=5000
 
-minimum=5000
+	min_tuples=[]
+	i=30
+	while(True):
+		b=valid_line_counter(i,i,tm)
+		#print(b)
+		i+=1
+		if(b<100):
+			break
+	    
+	#print(b)
+	min_e=i-2
+	min_l=i
+	minimum=100
+	for e in np.arange(i,i+50,2):
+		#print(e)
+		if(min_e!=e-2):
+			break
+		for l in np.arange(i,i+30):
+			a=valid_line_counter(e,l,tm)
+			if(a<=minimum and a>0):
+				minimum=a
+				#print(minimum)
+				min_e=e
+				min_l=l
+				min_tuples.append((e,l))
 
-min_tuples=[]
-i=30
-while(True):
-    b=valid_line_counter(i,i,tm)
-    print(b)
-    i+=1
-    if(b<100):
-        break
-    
-print(b)
-min_e=i-2
-min_l=i
-minimum=100
-for e in np.arange(i,i+50,2):
-    print(e)
-    if(min_e!=e-2):
-        break
-    for l in np.arange(i,i+30):
-        a=valid_line_counter(e,l,tm)
-        if(a<=minimum and a>0):
-            minimum=a
-            print(minimum)
-            min_e=e
-            min_l=l
-            min_tuples.append((e,l))
-#            lines = cv2.HoughLines(tm.edges(min_e),1,np.pi/180,min_l)
-#            cimg=draw_lines_polar(tm.img,lines)
-#            #ImageNumpyFormat = np.asarray(ImageItself)
-#            plt.imshow(cimg)
-#            plt.draw()
-#            plt.pause(1) # pause how many seconds
-#            plt.close()
-        #if (a==1):
-            #break
-
-img_display(tm.edges(min_e))            
-        
-lines = cv2.HoughLines(tm.edges(min_e),1,np.pi/180,min_l)
-cimg=draw_lines_polar(tm.img,lines)
-savename='./saved_images/{}_malleus.png'.format(filename)
-cv2.imwrite(savename,cimg)
+	#img_display(tm.edges(min_e))            
+		
+	lines = cv2.HoughLines(tm.edges(min_e),1,np.pi/180,min_l)
+	cimg=draw_lines_polar(tm.img,lines)
+	savename='./saved_images/AOM{}_malleus.png'.format(img_number)
+	cv2.imwrite(savename,cimg)
+	return min_e,min_l
 
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-
+	#cv2.waitKey(0)
+	#cv2.destroyAllWindows()
+for i in tqdm(np.arange(34,38)):
+	img_number=i
+	tm=Image(cv2.imread('./ear_AOM/AOM{}.jpg'.format(img_number)))
+	print(i,':',malleus_presence(i+1))
         
