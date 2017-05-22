@@ -12,36 +12,37 @@ import matplotlib.path as mpath
 
 
 def main():
-	#segment_tympanic_membrane('./ear_images/normalTympanic1.jpg') #cone of light throws off
-	#segment_tympanic_membrane('./ear_images/noisy1-1.jpg')
-	#segment_tympanic_membrane('./ear_images/noisy1-2.jpg')
-	#segment_tympanic_membrane('./ear_images/normalTympanic2.jpg') #handles well
-	#segment_tympanic_membrane('./ear_images/normalTympanic3.jpg') #handles well
 
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL1.jpg') #handles well
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL2.jpg') #all black
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL3.jpg') #probably stuck
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL3-1.jpg')
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL4.jpg') #probably getting stuck on circle, no output
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL5.jpg') #probably getting stuck on circle, no output
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL6.jpg')
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL7.jpg') # bad - edge stuck?
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL8.jpg')
-	segment_tympanic_membrane('./normal_ear_images/NORMAL8-1.jpg')
-	segment_tympanic_membrane('./normal_ear_images/NORMAL9-1.jpg')
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL9.jpg')
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL10.jpg') - too big
-	segment_tympanic_membrane('./normal_ear_images/NORMAL11.jpg') #handles okay
-	segment_tympanic_membrane('./normal_ear_images/NORMAL12.jpg') #handles well
-	segment_tympanic_membrane('./normal_ear_images/NORMAL13.jpg')
-	segment_tympanic_membrane('./normal_ear_images/NORMAL14.jpg')
-	segment_tympanic_membrane('./normal_ear_images/NORMAL15.jpg')
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL16.jpg') # black
-	# segment_tympanic_membrane('./normal_ear_images/NORMAL17.jpg') # black
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL18.jpg') # WAY off
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL19.jpg') # not close ehough
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL20.jpg')
-	#segment_tympanic_membrane('./normal_ear_images/NORMAL27.jpg')
+	segment_tympanic_membrane('./test_images/noisy27.jpg')
+	segment_tympanic_membrane('./test_images/noisy31.jpg')
+	segment_tympanic_membrane('./test_images/noisy42.jpg')
+	segment_tympanic_membrane('./test_images/noisy8-14.jpg')
+	segment_tympanic_membrane('./test_images/noisy8-15.jpg')
+
+	#segment_tympanic_membrane('./ear_normal/NORMAL1.jpg') #handles well
+	#segment_tympanic_membrane('./ear_normal/NORMAL2.jpg') #all black
+	#segment_tympanic_membrane('./ear_normal/NORMAL3.jpg') #probably stuck
+	#segment_tympanic_membrane('./ear_normal/NORMAL3-1.jpg')
+	#segment_tympanic_membrane('./ear_normal/NORMAL4.jpg') #probably getting stuck on circle, no output
+	#segment_tympanic_membrane('./ear_normal/NORMAL5.jpg') #probably getting stuck on circle, no output
+	#segment_tympanic_membrane('./ear_normal/NORMAL6.jpg')
+	#segment_tympanic_membrane('./ear_normal/NORMAL7.jpg') # bad - edge stuck?
+	#segment_tympanic_membrane('./ear_normal/NORMAL8.jpg')
+	segment_tympanic_membrane('./ear_normal/NORMAL8-1.jpg')
+	segment_tympanic_membrane('./ear_normal/NORMAL9-1.jpg')
+	#segment_tympanic_membrane('./ear_normal/NORMAL9.jpg')
+	#segment_tympanic_membrane('./ear_normal/NORMAL10.jpg') - too big
+	segment_tympanic_membrane('./ear_normal/NORMAL11.jpg') #handles okay
+	segment_tympanic_membrane('./ear_normal/NORMAL12.jpg') #handles well
+	segment_tympanic_membrane('./ear_normal/NORMAL13.jpg')
+	segment_tympanic_membrane('./ear_normal/NORMAL14.jpg')
+	segment_tympanic_membrane('./ear_normal/NORMAL15.jpg')
+	#segment_tympanic_membrane('./ear_normal/NORMAL16.jpg') # black
+	# segment_tympanic_membrane('./ear_normal/NORMAL17.jpg') # black
+	#segment_tympanic_membrane('./ear_normal/NORMAL18.jpg') # WAY off
+	#segment_tympanic_membrane('./ear_normal/NORMAL19.jpg') # not close ehough
+	#segment_tympanic_membrane('./ear_normal/NORMAL20.jpg')
+	#segment_tympanic_membrane('./ear_normal/NORMAL27.jpg')
 
 
 #TODO
@@ -50,9 +51,6 @@ def segment_tympanic_membrane(filename):
 	to show only membrane and displays/saves masked image."""
 	orig = read_image(filename)
 	orig.shape
-	#orig = scale_image(orig)
-	#orig.shape
-	#save_image(orig, 'test_scale.jpg')
 
 	#make grayscale
 	img = rgb2gray(orig)
@@ -93,7 +91,7 @@ def segment_tympanic_membrane(filename):
 
 	ax.imshow(orig)
 	plt.show()
-	fig.savefig(filename + '_segmented.jpg')
+	#fig.savefig(filename + '_segmented.jpg')
 
 	return;
 
