@@ -43,7 +43,7 @@ def tilt_calc():
 	
 	
 img=cv2.imread('./ear_AOM/AOM18.jpg',0)
-#img = cv2.resize(img, (50,50))
+img = cv2.resize(img, (300,300))
 img = img.astype(np.float32, copy=False)
 img=img/np.amax(img)
 height=np.shape(img)[1]
