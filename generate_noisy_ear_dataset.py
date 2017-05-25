@@ -33,7 +33,4 @@ for num in range(71):
 		"""
 
 		#save noisy image
-		#save_image(new, './noisy_ear_images/noisy2' + str(i) + '.jpg')
-		#save_image(new, './noisy_ear_images/noisy3' + str(i) + '.jpg')
-		#save_image(new, './noisy_ear_images/noisy4' + str(i) + '.jpg')
 		save_image(new, './noisy_ear_normal_square/noisy' + str(num) + '-' + str(i) + '.jpg')
