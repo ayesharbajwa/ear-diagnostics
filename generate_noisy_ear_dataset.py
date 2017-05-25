@@ -11,7 +11,7 @@ import random
 
 for num in range(71):
 
-	path = './ear_normal_square/NORMAL' + str(num) + 'jpg'
+	path = './ear_normal_square/NORMAL' + str(num) + '.jpg'
 	orig = read_image(path)
 
 	for i in range(5):

@@ -13,6 +13,12 @@ import matplotlib.path as mpath
 
 def main():
 
+	for num in range(71):
+		segment_tympanic_membrane('./ear_normal_square/NORMAL' + str(num) + '.jpg')	
+
+
+	'''
+
 	segment_tympanic_membrane('./test_images/noisy27.jpg')
 	segment_tympanic_membrane('./test_images/noisy31.jpg')
 	segment_tympanic_membrane('./test_images/noisy42.jpg')
@@ -43,6 +49,7 @@ def main():
 	#segment_tympanic_membrane('./ear_normal/NORMAL19.jpg') # not close ehough
 	#segment_tympanic_membrane('./ear_normal/NORMAL20.jpg')
 	#segment_tympanic_membrane('./ear_normal/NORMAL27.jpg')
+	'''
 
 
 #TODO
