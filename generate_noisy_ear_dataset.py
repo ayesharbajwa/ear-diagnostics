@@ -9,7 +9,7 @@ import random
 
 #read in original image from which to create noisy images
 
-for num in range(71):
+for num in range(70):
 
 	path = './ear_normal_square/NORMAL' + str(num) + '.jpg'
 	orig = read_image(path)
