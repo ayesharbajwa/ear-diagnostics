@@ -1,13 +1,15 @@
 #!/bin/bash
-for i in {1..10}
+for i in {1..15}
 do
 	echo $i	
 	cd /home/madhielango/training/ear_AOM
 	for f in *.jpg; do mv -n "$f" "${f/*/$RANDOM.jpg}"; done
 	cd /home/madhielango/training/ear_normal
 	for f in *.jpg; do mv -n "$f" "${f/*/$RANDOM.jpg}"; done
+	cd /home/madhielango/training/ear_OME
+	for f in *.jpg; do mv -n "$f" "${f/*/$RANDOM.jpg}"; done
 	cd /home/madhielango/tensorflow
-	bazel-bin/tensorflow/examples/image_retraining/retrain --image_dir /home/madhielango/training --print_misclassified_test_images --learning-rate 0.0001
+	bazel-bin/tensorflow/examples/image_retraining/retrain --image_dir /home/madhielango/training --print_misclassified_test_images --learning-rate 0.001
 done
 
 

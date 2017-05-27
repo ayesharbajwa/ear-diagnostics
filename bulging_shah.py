@@ -9,10 +9,47 @@ from numpy import sqrt
 import cmath
 from matplotlib import cm
 from mpl_toolkits.mplot3d.axes3d import Axes3D
+import matplotlib.path as mplPath
 
 
 eps = np.finfo(float).eps
 i=cmath.sqrt(-1)
+
+def segment_tympanic_membrane(filename):
+	"""Given image input containing tympanic membrane, segments by masking
+	to show only membrane and displays/saves masked image."""
+	orig = read_image(filename)
+	orig.shape
+
+	#make grayscale
+	img = rgb2gray(orig)
+
+	#make histogram equalized
+	img = equalize_hist(img)
+
+	#initialize search circle in center
+	height = img.shape[0]
+	width = img.shape[1]
+	s = np.linspace(0, 2*np.pi, height)
+	#start centered and use search boundary
+	x = width/2 + width/2*np.cos(s)
+	y = height/2 + height/2*np.sin(s)
+	init = np.array([x, y]).T
+
+
+	#gaussian filter before contour fit
+	snake = active_contour(gaussian(img, 3), init, alpha=0.015, beta=10, gamma=0.001)
+	
+	fig = plt.figure(figsize=(7, 7))
+	ax = fig.add_subplot(111)
+	ax.plot(init[:, 0], init[:, 1], '-k', lw=3) #initial search circle
+	ax.plot(snake[:, 0], snake[:, 1], '-k', lw=3) #final contour
+	
+	#want to mask outside of snake
+	coords = []
+	return (coords)
+	
+
 
 def moments():
 	mu=np.sum(img)/np.size(img)
@@ -41,14 +78,14 @@ def tilt_calc():
 	return math.atan(avy/avx)
 	
 	
-	
-img=cv2.imread('./ear_AOM/AOM18.jpg',0)
-img = cv2.resize(img, (300,300))
+img=cv2.imread('./ear_AOM/AOM1.jpg',0)	
+#img=cv2.imread('./ear_normal/NORMAL12.jpg',0)
+#img = cv2.resize(img, (300,300))
+
 img = img.astype(np.float32, copy=False)
 img=img/np.amax(img)
 height=np.shape(img)[1]
 width=np.shape(img)[0]
-print(img)
 mu,sigma=moments()
 print(mu,sigma)
 
@@ -58,7 +95,7 @@ slant=slant_calc()
 print (albedo,slant)
 tilt=tilt_calc()
 
-######################copied from guide###################
+######################copied from guide (Elbhanian)###################
 
 p = np.zeros((width,height))
 q = np.zeros((width,height))
@@ -67,7 +104,7 @@ Z = np.zeros((width,height))
 Z_x = np.zeros((width,height))
 Z_y = np.zeros((width,height))
 
-maxIter = 6
+maxIter = 3
 
 ix = cos(tilt) * tan(slant)
 iy = sin(tilt) * tan(slant)
@@ -92,15 +129,74 @@ Z=np.maximum(Z,np.mean(Z)-10*np.std(Z))
 x = range(width)
 y = range(height)
 X, Y = np.meshgrid(x, y)
-Z=sp.signal.medfilt2d(Z,15)
+Z=sp.signal.medfilt2d(Z,29)
+
+Z=Z-np.mean(Z)
+Z=Z/np.std(Z)
 hf1 = plt.figure(1)
 ax = hf1.add_subplot(111, projection='3d')
 ax.plot_surface(X,Y, np.transpose(Z),cmap=cm.coolwarm)
-hf2=plt.figure(2)
+
+
+#edge=segment_tympanic_membrane('./ear_AOM/AOM18.jpg')
+edge=segment_tympanic_membrane('/home/madhielango/Documents/aom2_cut.png')
+#edge=segment_tympanic_membrane('./ear_normal/NORMAL12.jpg')
+
+edges=np.asarray(edge)
+edge_path=mplPath.Path(edges)
+
+cont=sp.interpolate.interp2d(x,y,np.transpose(Z))
+heights=[]
+
+for x in edge:
+	heights.append(cont(x[0],x[1]))
+
+
+
+edges_bias=np.concatenate((edges,np.ones([len(edge),1])),1)
+
+
+#coeff= (A'*A)^-1*A'*x) by linear least squares
+
+abc=np.matmul(np.transpose(edges_bias),edges_bias)
+coeff=np.matmul(np.linalg.inv(abc),np.transpose(edges_bias))
+coeff=np.matmul(coeff,heights)
+
+print(coeff)
+
+x = range(width)
+y = range(height)
+X, Y = np.meshgrid(x, y)
+plane=coeff[0]*X+coeff[1]*Y+coeff[2]
+
+hf2 = plt.figure(1)
 ay = hf2.add_subplot(111, projection='3d')
-ay.plot_surface(X,Y, np.transpose(img),cmap=cm.coolwarm)
+
+corrected=np.transpose(Z)
+corrected=corrected-plane
+
+#only show contour plot of TM
+
+total_bulge=0
+total_TM=0
+#corrected=corrected-np.median(corrected)
+for i in y:
+	for j in x:
+		if(edge_path.contains_point((i,j))==False):
+			corrected[i,j]=0
+		else:
+			total_bulge+=corrected[i,j]
+			total_TM+=1
+
+mean_bulge=total_bulge/total_TM
+
+#ay.plot_surface(X,Y, plane,cmap=cm.bwr)
+#ay.plot_surface(X,Y, np.transpose(Z),cmap=cm.bwr)
+ay.plot_surface(X,Y,corrected ,cmap=cm.bwr)
 plt.show()
 
+print('Bulging:')
+print(mean_bulge)
 
 #cv2.imshow('image',img)
 #cv2.waitKey(0)

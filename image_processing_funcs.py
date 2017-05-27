@@ -89,7 +89,7 @@ def segment_tympanic_membrane(filename):
 	sy = snake[:, 1]
 	for i in range(len(snake)):
 		coords.append((sx[i], sy[i]))
-	print coords
+	
 
 	mask_outside_polygon(coords)
 	
@@ -99,8 +99,8 @@ def segment_tympanic_membrane(filename):
 	ax.imshow(orig)
 	plt.show()
 	#fig.savefig(filename + '_segmented.jpg')
-
-	return;
+	return (coords)
+	
 
 
 
