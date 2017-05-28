@@ -10,46 +10,10 @@ import cmath
 from matplotlib import cm
 from mpl_toolkits.mplot3d.axes3d import Axes3D
 import matplotlib.path as mplPath
-
+from image_processing_funcs import segment_tympanic_membrane
 
 eps = np.finfo(float).eps
 i=cmath.sqrt(-1)
-
-def segment_tympanic_membrane(filename):
-	"""Given image input containing tympanic membrane, segments by masking
-	to show only membrane and displays/saves masked image."""
-	orig = read_image(filename)
-	orig.shape
-
-	#make grayscale
-	img = rgb2gray(orig)
-
-	#make histogram equalized
-	img = equalize_hist(img)
-
-	#initialize search circle in center
-	height = img.shape[0]
-	width = img.shape[1]
-	s = np.linspace(0, 2*np.pi, height)
-	#start centered and use search boundary
-	x = width/2 + width/2*np.cos(s)
-	y = height/2 + height/2*np.sin(s)
-	init = np.array([x, y]).T
-
-
-	#gaussian filter before contour fit
-	snake = active_contour(gaussian(img, 3), init, alpha=0.015, beta=10, gamma=0.001)
-	
-	fig = plt.figure(figsize=(7, 7))
-	ax = fig.add_subplot(111)
-	ax.plot(init[:, 0], init[:, 1], '-k', lw=3) #initial search circle
-	ax.plot(snake[:, 0], snake[:, 1], '-k', lw=3) #final contour
-	
-	#want to mask outside of snake
-	coords = []
-	return (coords)
-	
-
 
 def moments():
 	mu=np.sum(img)/np.size(img)
