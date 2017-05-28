@@ -37,9 +37,9 @@ def tilt_calc():
 	return math.atan(avy/avx)
 	
 print('Available files:')	
-os.system('cd shading_images ; ls')
+os.system('cd ear_AOM ; ls')
 print('Input file:')
-filename='./shading_images/{}'.format(input())
+filename='./ear_AOM/{}'.format(input())
 img=cv2.imread(filename,0)
 img = img.astype(np.float32, copy=False)
 img=img/np.amax(img)
