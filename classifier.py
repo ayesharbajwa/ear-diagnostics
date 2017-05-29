@@ -5,8 +5,8 @@ import numpy as np
 import tensorflow as tf
 
 imagePath = '/home/madhielango/training/ear_OME/3242.jpg'
-modelFullPath = '/tmp/output_graph.pb'
-labelsFullPath = '/tmp/output_labels.txt'
+modelFullPath = '/home/madhielango/M1g/output_graph.pb'
+labelsFullPath = '/home/madhielango/M1g/output_labels.txt'
 
 
 def create_graph():
@@ -51,4 +51,6 @@ def run_inference_on_image():
 
 
 if __name__ == '__main__':
-    run_inference_on_image()
+    for i in range (8):
+        imagePath='/home/madhielango/ear-diagnostics/ear_AOM/AOM{}.jpg'.format(i+1)
+        run_inference_on_image()

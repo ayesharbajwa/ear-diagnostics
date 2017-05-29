@@ -154,9 +154,9 @@ for i in y:
 
 mean_bulge=total_bulge/total_TM
 
-#ay.plot_surface(X,Y, plane,cmap=cm.bwr)
-#ay.plot_surface(X,Y, np.transpose(Z),cmap=cm.bwr)
-ay.plot_surface(X,Y,corrected ,cmap=cm.bwr)
+ay.plot_surface(X,Y, plane)
+ay.plot_surface(X,Y, np.transpose(Z),cmap=cm.bwr)
+#ay.plot_surface(X,Y,corrected ,cmap=cm.bwr)
 plt.show()
 
 print('Bulging:')
