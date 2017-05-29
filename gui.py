@@ -1,4 +1,7 @@
-import Tkinter as tk
+try:
+    import Tkinter as tk
+except ImportError:
+    import tkinter as tk
 from hearing_test import *
 #from camera import *
 
