@@ -23,20 +23,31 @@ def play_sound(f,v):
 
 def hearing_test():
 	"""Takes user input and turns it into a boolean matrix"""
-	freq=[2000,10000]      #frequencies tested
-	vol=[1,0.5]                            #num of levels
+	freq=[250,500,1000,2000,4000,8000]#[250,500,1000,2000,4000,8000]      #frequencies tested
+	vol_tests=5
+	startvol=0.5
 	delaytime=2
-	canhear=np.zeros((len(vol),len(freq)))
+	canhear=np.zeros((1,len(freq)))
 
-	ready=input('Press enter when you want to begin, and whenever you hear a sound')
+	ready=input('Press enter when you want to begin')
 
 	for f in range(len(freq)):
-		for v in range(len(vol)):
+		canhearvol=1
+		vol=startvol
+		for v in range(vol_tests):
 			#sound of frequency freq(f), level v
 			print("Listen for the tone")
 			time.sleep(delaytime) #wait for 'delaytime' seconds before sound is played
-			play_sound(freq[f],vol[v])
-			canhear[v,f]=input("Press 1 if you heard a tone, 0 otherwise, and then enter")
-	print("canhear=",canhear)
+			play_sound(freq[f],vol)
+			hear=float(input("Press 1 if you heard a tone, 0 otherwise, and then enter"))
+			delta=pow(2,(-(v+2)))
+			if hear>0.5:
+				canhearvol=vol
+				vol=vol-delta
+			else:
+				vol=vol+delta
+			print("vol=",vol)
+		canhear[0,f]=canhearvol
 
-hearing_test()
+if __name__ == "__main__":
+	hearing_test()
