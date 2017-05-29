@@ -2,6 +2,8 @@ import numpy as np
 import cv2
 import datetime
 from time import gmtime, strftime
+camera_port=0
+camera = cv2.VideoCapture(camera_port)
 
 def get_image():
 	retval, im = camera.read()
