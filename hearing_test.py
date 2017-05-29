@@ -29,7 +29,7 @@ def hearing_test():
 	delaytime=2
 	canhear=np.zeros((1,len(freq)))
 
-	ready=input('Press enter when you want to begin')
+	ready=input("Press enter when you want to begin")
 
 	for f in range(len(freq)):
 		canhearvol=1
@@ -39,7 +39,7 @@ def hearing_test():
 			print("Listen for the tone")
 			time.sleep(delaytime) #wait for 'delaytime' seconds before sound is played
 			play_sound(freq[f],vol)
-			hear=float(input("Press 1 if you heard a tone, 0 otherwise, and then enter"))
+			hear=float(input("input 1 if you heard the noise, 0 otherwise, and then enter"))
 			delta=pow(2,(-(v+2)))
 			if hear>0.5:
 				canhearvol=vol
