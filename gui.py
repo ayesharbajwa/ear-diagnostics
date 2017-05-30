@@ -88,6 +88,7 @@ class Panel:
 	def print_hearing(self):
 		print("Adminstering hearing test.")
 		ht.hearing_test()
+		print("Done.")
 		return
 
 	def enter_temperature(self):
@@ -98,16 +99,19 @@ class Panel:
 	def print_feed(self):
 		print("Rolling live feed.")
 		# cam.main() 				#UNCOMMENT
+		print("Done.")
 		return
 
 	def print_read(self):
 		print("Reading data file.")
 		# TODO: import dath from file with correct typing for plotting
+		print("Done.")
 		#return some value?
 
 	def print_plot(self):
 		print("Creating plot.")
 		# TODO: call plotting function
+		print("Done.")
 		return
 
 	def enter_path(self):
@@ -119,17 +123,20 @@ class Panel:
 		path = self.enter_path()
 		#red = redness.redness(path) 		#UNCOMMENT
 		#print(red) 						#UNCOMMENT
+		print("Done.")
 		#return red 						#UNCOMMENT
 
 	def print_bulge(self):
 		print("Calculating bulging.")
 		# TODO: call bulging function, display explicitly if not incl.
+		print("Done.")
 		return
 
 	def print_classify(self):
 		print("Classiying...")
 		path = './saved_images/image.jpg'
 		#cf.run_inference_on_image(path)	#UNCOMMENT
+		print("Done.")
 		return
 
 
