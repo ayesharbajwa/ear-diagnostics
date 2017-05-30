@@ -192,12 +192,10 @@ def scale_image(numpyArray):
 		if width > 500:
 			factor = width/500
 			resize(numpyArray, (factor*width, factor*height))
-			#rescale(numpyArray, width/500., preserve_range=True)
 	else:
 		if height > 500:
 			factor = height/500
 			resize(numpyArray, (factor*width, factor*height))
-			#rescale(numpyArray, height/500., preserve_range=True)
 	return;
 
 
