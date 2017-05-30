@@ -25,5 +25,8 @@ def redness(img):
 	tm=Image(cv2.imread('./{}'.format(img)))
 	return ((np.mean(tm.img[:,:,2]))/(np.mean(tm.img)))
 
+def main():
+    print (redness('ear_normal/NORMAL4.jpg'))
+
 if __name__ == '__main__':
-	print (redness('ear_normal/NORMAL4.jpg'))
+    main()
