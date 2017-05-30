@@ -120,7 +120,7 @@ class Panel:
 
 	def print_redness(self):
 		print("Calculating redness.")
-		path = self.enter_path()
+		path = './saved_images/image.jpg'
 		#red = redness.redness(path) 		#UNCOMMENT
 		#print(red) 						#UNCOMMENT
 		print("Done.")
