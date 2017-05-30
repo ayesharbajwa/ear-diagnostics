@@ -4,7 +4,7 @@ except ImportError:
 	import tkinter as tk
 
 #UNCOMMENT THESE
-#import hearing_test as ht
+import hearing_test as ht
 #import image_processing_funcs as ipf
 #import camera as cam
 # TODO: import bulging
@@ -108,6 +108,7 @@ class Panel:
 	def print_feed(self):
 		print "Rolling live feed."
 		# TODO: call feed function as cam.func
+		# cam.main()
 		#return
 
 	def print_capture(self):
@@ -131,8 +132,9 @@ class Panel:
 
 	def print_redness(self):
 		print "Calculating redness."
-		# TODO: call redness function, display value
-		#return
+		path = input("Enter the file path:")
+		# red = redness.main(path)
+		#return red
 
 	def print_bulge(self):
 		print "Calculating bulging."
