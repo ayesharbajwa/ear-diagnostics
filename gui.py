@@ -67,20 +67,17 @@ class Panel:
 		c = tk.Label(frame3, text="Image Processing", font=("Helvetica", 18))
 		c.pack()
 
-		self.path = tk.Button(frame3, text="Enter Image File Path", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.enter_path())
-		self.path.pack(pady=8, padx=15)
+		#self.path = tk.Button(frame3, text="Enter Image File Path", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.enter_path())
+		#self.path.pack(pady=8, padx=15)
 
 		self.red = tk.Button(frame3, text="Analyse Redness", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_redness())
 		self.red.pack(pady=8, padx=15)
 
-		self.bulge = tk.Button(frame3, text="Analyse Bulging", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_bulge())
-		self.bulge.pack(pady=8, padx=15)
+		#self.bulge = tk.Button(frame3, text="Analyse Bulging", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_bulge())
+		#self.bulge.pack(pady=8, padx=15)
 
 		self.cf = tk.Button(frame3, text="Classify", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_classify())
 		self.cf.pack(pady=8, padx=15)
-
-		self.seg = tk.Button(frame3, text="Segment", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_seg())
-		self.seg.pack(pady=8, padx=15)
 
 
 
@@ -119,7 +116,7 @@ class Panel:
 
 	def print_redness(self):
 		print("Calculating redness.")
-		path = input("Enter the file path:")
+		path = self.enter_path()
 		#red = redness.redness(path) 		#UNCOMMENT
 		#print(red) 						#UNCOMMENT
 		#return red 						#UNCOMMENT
@@ -131,13 +128,11 @@ class Panel:
 
 	def print_classify(self):
 		print("Classiying...")
-		path = input("Enter the file path:")
+		path = self.enter_path()
 		#cf.run_inference_on_image(path)	#UNCOMMENT
 		return
 
-	def print_seg(self):
-		print("Segmenting...")
-		#return ipf.segment_tympanic_membrane('./saved_images/image2017_05_18_15_22_31.png')	#UNCOMMENT
+
 
 def main():
 	panel = Panel()
