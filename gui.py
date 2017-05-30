@@ -5,11 +5,11 @@ except ImportError:
 
 
 import hearing_test as ht
-#import image_processing_funcs as ipf 		#UNCOMMENT
-#import camera as cam 						#UNCOMMENT
-# TODO: import bulging 						#UNCOMMENT
-# TODO import redness 						#UNCOMMENT
-# TODO import classifier as cf 				#UNCOMMENT
+# import image_processing_funcs as ipf
+# import camera as cam 						#UNCOMMENT
+# import bulging_shah
+# import redness 							#UNCOMMENT
+# import classifier as cf 					#UNCOMMENT
 
 
 class Panel:
@@ -43,9 +43,6 @@ class Panel:
 
 		self.feed = tk.Button(frame, text="Display Live Feed", font=("Helvetica", 15), highlightbackground='#2981ce', command=lambda: self.print_feed())
 		self.feed.pack(pady=8, padx=15)
-
-		self.capture = tk.Button(frame, text="Capture Image", font=("Helvetica", 15), highlightbackground='#2981ce', command=lambda: self.print_capture())
-		self.capture.pack(pady=8, padx=15)
 
 
 
@@ -94,7 +91,7 @@ class Panel:
 	def print_hearing(self):
 		print("Adminstering hearing test.")
 		ht.hearing_test()
-		#return
+		return
 
 	def enter_temperature(self):
 		temp = float(input("Enter the patient ear temperature in C:"))
@@ -104,12 +101,7 @@ class Panel:
 	def print_feed(self):
 		print("Rolling live feed.")
 		# cam.main() 				#UNCOMMENT
-		#return
-
-	def print_capture(self):
-		print("Image captured.")
-		# TODO: call capture function as cam.func
-		#return
+		return
 
 	def print_read(self):
 		print("Reading data file.")
@@ -119,7 +111,7 @@ class Panel:
 	def print_plot(self):
 		print("Creating plot.")
 		# TODO: call plotting function
-		#return
+		return
 
 	def enter_path(self):
 		path = input("Enter the file path:")
@@ -135,12 +127,13 @@ class Panel:
 	def print_bulge(self):
 		print("Calculating bulging.")
 		# TODO: call bulging function, display explicitly if not incl.
-		#return
+		return
 
 	def print_classify(self):
 		print("Classiying...")
 		path = input("Enter the file path:")
-		#return run_inference_on_image(path)	#UNCOMMENT
+		#cf.run_inference_on_image(path)	#UNCOMMENT
+		return
 
 	def print_seg(self):
 		print("Segmenting...")
