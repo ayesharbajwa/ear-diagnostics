@@ -128,7 +128,7 @@ class Panel:
 
 	def print_classify(self):
 		print("Classiying...")
-		path = self.enter_path()
+		path = './saved_images/image.jpg'
 		#cf.run_inference_on_image(path)	#UNCOMMENT
 		return
 
