@@ -43,7 +43,7 @@ def tilt_calc():
 	
 	
 img=cv2.imread('./ear_AOM/AOM1.jpg',0)	
-#img=cv2.imread('./ear_normal/NORMAL12.jpg',0)
+#img=cv2.imread('./ear_normal/NORMAL1.jpg',0)
 #img = cv2.resize(img, (300,300))
 
 img = img.astype(np.float32, copy=False)
@@ -102,9 +102,9 @@ ax = hf1.add_subplot(111, projection='3d')
 ax.plot_surface(X,Y, np.transpose(Z),cmap=cm.coolwarm)
 
 
-#edge=segment_tympanic_membrane('./ear_AOM/AOM18.jpg')
+#edge=segment_tympanic_membrane('./ear_AOM/AOM7.jpg')
 edge=segment_tympanic_membrane('/home/madhielango/Documents/aom2_cut.png')
-#edge=segment_tympanic_membrane('./ear_normal/NORMAL12.jpg')
+#edge=segment_tympanic_membrane('./ear_normal/NORMAL1.jpg')
 
 edges=np.asarray(edge)
 edge_path=mplPath.Path(edges)
@@ -148,15 +148,16 @@ for i in y:
 	for j in x:
 		if(edge_path.contains_point((i,j))==False):
 			corrected[i,j]=0
+			plane[i,j]='NaN'
 		else:
 			total_bulge+=corrected[i,j]
 			total_TM+=1
 
 mean_bulge=total_bulge/total_TM
 
-ay.plot_surface(X,Y, plane)
-ay.plot_surface(X,Y, np.transpose(Z),cmap=cm.bwr)
-#ay.plot_surface(X,Y,corrected ,cmap=cm.bwr)
+#ay.plot_surface(X,Y, plane, alpha=0.6)
+#ay.plot_surface(X,Y, np.transpose(Z),cmap=cm.bwr, alpha=0.2)
+ay.plot_surface(X,Y,corrected ,cmap=cm.bwr)
 plt.show()
 
 print('Bulging:')

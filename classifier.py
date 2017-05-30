@@ -42,9 +42,11 @@ def run_inference_on_image(img):
             human_string = labels[node_id]
             score = predictions[node_id]
             print('Probability of %s = %.5f' % (human_string, score))
+            if 'AOM' in human_string:
+                answer1=score
 
         answer = labels[top_k[0]]
-        return answer
+        return answer1
 
 
 if __name__ == '__main__':

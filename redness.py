@@ -23,7 +23,7 @@ class Image(object):
 
 def redness(img):
 	tm=Image(cv2.imread('./{}'.format(img)))
-	return ((np.mean(tm.img[:,:,2]))/(np.mean(tm.img)))
+	return ((np.sum(tm.img[:,:,2]))/(np.sum(tm.img)))
 
 def main():
     print (redness('ear_normal/NORMAL4.jpg'))
