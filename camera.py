@@ -31,7 +31,7 @@ def main():
 				
 			if(a==99):
 				saving=get_image()
-				file = "./saved_images/image{}.png".format(current_time())
+				file = "./saved_images/image.jpg"
 				cv2.imwrite(file, get_image())
 				print("")
 				print("Image Captured")	
