@@ -1,8 +1,20 @@
 try:
-    import Tkinter as tk
+	import Tkinter as tk
 except ImportError:
-    import tkinter as tk
-from hearing_test import *
+	import tkinter as tk
+
+#UNCOMMENT THESE
+#import hearing_test as ht
+#import image_processing_funcs as ipf
+#import camera as cam
+# TODO: import bulging
+# TODO import redness
+# TODO import other?
+
+
+#LEAVE THESE - all have own main()
+#from hearing_test import *
+#from image_processing_funcs import segment_tympanic_membrane
 #from camera import *
 
 
@@ -10,6 +22,8 @@ class Panel:
 
 	def __init__(self):
 		self.tk = master = tk.Tk()
+		self.images = [] #initialize to empty array. Add paths of each capture?
+		self.temp = 0.0
 
 		w = tk.Label(master, text="EAR DIAGNOSTICS", font=("Helvetica", 25), highlightbackground='#0f0684')
 		w.pack()
@@ -72,7 +86,7 @@ class Panel:
 		self.bulge = tk.Button(frame3, text="Analyse Bulging", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_bulge())
 		self.bulge.pack(pady=8, padx=15)
 
-		self.seg = tk.Button(frame3, text="Segment", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_bulge())
+		self.seg = tk.Button(frame3, text="Segment", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_seg())
 		self.seg.pack(pady=8, padx=15)
 
 
@@ -83,27 +97,32 @@ class Panel:
 
 	def print_hearing(self):
 		print "Adminstering hearing test."
-		hearing_test()
+		ht.hearing_test()
 		#return
 
 	def enter_temperature(self):
 		temp = float(input("Enter the patient ear temperature in C:"))
+		self.temp = temp
 		return temp
 
 	def print_feed(self):
 		print "Rolling live feed."
+		# TODO: call feed function as cam.func
 		#return
 
 	def print_capture(self):
 		print "Image captured."
+		# TODO: call capture function as cam.func
 		#return
 
 	def print_read(self):
 		print "Reading data file."
-		#return
+		# TODO: import dath from file with correct typing for plotting
+		#return some value?
 
 	def print_plot(self):
 		print "Creating plot."
+		# TODO: call plotting function
 		#return
 
 	def enter_path(self):
@@ -112,11 +131,18 @@ class Panel:
 
 	def print_redness(self):
 		print "Calculating redness."
+		# TODO: call redness function, display value
 		#return
 
 	def print_bulge(self):
 		print "Calculating bulging."
+		# TODO: call bulging function, display explicitly if not incl.
 		#return
+
+	def print_seg(self):
+		print "Segmenting..."
+		# TODO: test import on Pi
+		#return ipf.segment_tympanic_membrane('./saved_images/image2017_05_18_15_22_31.png')
 
 def main():
 	panel = Panel()
