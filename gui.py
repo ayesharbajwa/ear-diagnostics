@@ -3,19 +3,13 @@ try:
 except ImportError:
 	import tkinter as tk
 
-#UNCOMMENT THESE
+
 import hearing_test as ht
-#import image_processing_funcs as ipf
-#import camera as cam
-# TODO: import bulging
-# TODO import redness
-# TODO import classifier as cf
-
-
-#LEAVE THESE - all have own main()
-#from hearing_test import *
-#from image_processing_funcs import segment_tympanic_membrane
-#from camera import *
+#import image_processing_funcs as ipf 		#UNCOMMENT
+#import camera as cam 						#UNCOMMENT
+# TODO: import bulging 						#UNCOMMENT
+# TODO import redness 						#UNCOMMENT
+# TODO import classifier as cf 				#UNCOMMENT
 
 
 class Panel:
@@ -31,7 +25,6 @@ class Panel:
 		x = tk.Label(master, text="Welcome to our GUI.", font=("Helvetica", 20))
 		x.pack()
 		self.quit = tk.Button(master, text="QUIT", font=("Helvetica", 15), highlightbackground='#3E4149', command=master.quit)
-		#self.button.pack(side=tk.LEFT)
 		self.quit.pack(pady=8, padx=15)
 
 
@@ -86,7 +79,7 @@ class Panel:
 		self.bulge = tk.Button(frame3, text="Analyse Bulging", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_bulge())
 		self.bulge.pack(pady=8, padx=15)
 
-		self.cf = tk.Button(frame3, text="Classify", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_seg())
+		self.cf = tk.Button(frame3, text="Classify", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_classify())
 		self.cf.pack(pady=8, padx=15)
 
 		self.seg = tk.Button(frame3, text="Segment", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_seg())
@@ -110,8 +103,7 @@ class Panel:
 
 	def print_feed(self):
 		print("Rolling live feed.")
-		# TODO: call feed function as cam.func
-		# cam.main()
+		# cam.main() 				#UNCOMMENT
 		#return
 
 	def print_capture(self):
@@ -136,8 +128,9 @@ class Panel:
 	def print_redness(self):
 		print("Calculating redness.")
 		path = input("Enter the file path:")
-		# red = redness.main(path)
-		#return red
+		#red = redness.redness(path) 		#UNCOMMENT
+		#print(red) 						#UNCOMMENT
+		#return red 						#UNCOMMENT
 
 	def print_bulge(self):
 		print("Calculating bulging.")
@@ -146,14 +139,12 @@ class Panel:
 
 	def print_classify(self):
 		print("Classiying...")
-		# TODO: test import on Pi
 		path = input("Enter the file path:")
-		#return run_inference_on_image(path)
+		#return run_inference_on_image(path)	#UNCOMMENT
 
 	def print_seg(self):
 		print("Segmenting...")
-		# TODO: test import on Pi
-		#return ipf.segment_tympanic_membrane('./saved_images/image2017_05_18_15_22_31.png')
+		#return ipf.segment_tympanic_membrane('./saved_images/image2017_05_18_15_22_31.png')	#UNCOMMENT
 
 def main():
 	panel = Panel()
