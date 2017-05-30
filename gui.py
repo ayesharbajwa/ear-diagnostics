@@ -9,7 +9,7 @@ import hearing_test as ht
 #import camera as cam
 # TODO: import bulging
 # TODO import redness
-# TODO import other?
+# TODO import classifier as cf
 
 
 #LEAVE THESE - all have own main()
@@ -86,6 +86,9 @@ class Panel:
 		self.bulge = tk.Button(frame3, text="Analyse Bulging", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_bulge())
 		self.bulge.pack(pady=8, padx=15)
 
+		self.cf = tk.Button(frame3, text="Classify", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_seg())
+		self.cf.pack(pady=8, padx=15)
+
 		self.seg = tk.Button(frame3, text="Segment", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_seg())
 		self.seg.pack(pady=8, padx=15)
 
@@ -96,7 +99,7 @@ class Panel:
 		self.tk.mainloop() # Hang around...
 
 	def print_hearing(self):
-		print "Adminstering hearing test."
+		print("Adminstering hearing test.")
 		ht.hearing_test()
 		#return
 
@@ -106,23 +109,23 @@ class Panel:
 		return temp
 
 	def print_feed(self):
-		print "Rolling live feed."
+		print("Rolling live feed.")
 		# TODO: call feed function as cam.func
 		# cam.main()
 		#return
 
 	def print_capture(self):
-		print "Image captured."
+		print("Image captured.")
 		# TODO: call capture function as cam.func
 		#return
 
 	def print_read(self):
-		print "Reading data file."
+		print("Reading data file.")
 		# TODO: import dath from file with correct typing for plotting
 		#return some value?
 
 	def print_plot(self):
-		print "Creating plot."
+		print("Creating plot.")
 		# TODO: call plotting function
 		#return
 
@@ -131,18 +134,24 @@ class Panel:
 		return path
 
 	def print_redness(self):
-		print "Calculating redness."
+		print("Calculating redness.")
 		path = input("Enter the file path:")
 		# red = redness.main(path)
 		#return red
 
 	def print_bulge(self):
-		print "Calculating bulging."
+		print("Calculating bulging.")
 		# TODO: call bulging function, display explicitly if not incl.
 		#return
 
+	def print_classify(self):
+		print("Classiying...")
+		# TODO: test import on Pi
+		path = input("Enter the file path:")
+		#return run_inference_on_image(path)
+
 	def print_seg(self):
-		print "Segmenting..."
+		print("Segmenting...")
 		# TODO: test import on Pi
 		#return ipf.segment_tympanic_membrane('./saved_images/image2017_05_18_15_22_31.png')
 
