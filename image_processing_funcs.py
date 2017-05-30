@@ -13,12 +13,13 @@ import matplotlib.path as mpath
 
 def main():
 
-	for num in range(71):
-		segment_tympanic_membrane('./ear_normal_square/NORMAL' + str(num) + '.jpg')	
+	segment_tympanic_membrane('./saved_images/image2017_05_18_15_22_31.png')
+
+	#for num in range(71):
+		#segment_tympanic_membrane('./ear_normal_square/NORMAL' + str(num) + '.jpg')	
 
 
 	'''
-
 	segment_tympanic_membrane('./test_images/noisy27.jpg')
 	segment_tympanic_membrane('./test_images/noisy31.jpg')
 	segment_tympanic_membrane('./test_images/noisy42.jpg')
@@ -105,37 +106,36 @@ def segment_tympanic_membrane(filename):
 
 
 def mask_outside_polygon(perimeter, ax=None):
-    """ Plots a mask on the specified axis such that all areas outside of
-    perimeter are masked. Perimeter is a list of tuples outlining the crop
-    region to maintain. Returns the matplotlib.patches.PathPatch instance
-    plotted on the figure."""
+	""" Plots a mask on the specified axis such that all areas outside of
+	perimeter are masked. Perimeter is a list of tuples outlining the crop
+	region to maintain. Returns the matplotlib.patches.PathPatch instance
+	plotted on the figure."""
 
-    if ax is None:
-        ax = plt.gca()
+	if ax is None:
+		ax = plt.gca()
 
-    #get current plot limits
-    xlim = ax.get_xlim()
-    ylim = ax.get_ylim()
+	#get current plot limits
+	xlim = ax.get_xlim()
+	ylim = ax.get_ylim()
 
-    #corners of the plot boundaries in clockwise order
-    bounds = [(xlim[0], ylim[0]), (xlim[0], ylim[1]),
-    	(xlim[1], ylim[1]), (xlim[1], ylim[0]),
-    	(xlim[0], ylim[0])]
+	#corners of the plot boundaries in clockwise order
+	bounds = [(xlim[0], ylim[0]), (xlim[0], ylim[1]),
+		(xlim[1], ylim[1]), (xlim[1], ylim[0]),
+		(xlim[0], ylim[0])]
 
-    # 
-    bound_codes = [mpath.Path.MOVETO] + (len(bounds) - 1) * [mpath.Path.LINETO]
-    poly_codes = [mpath.Path.MOVETO] + (len(perimeter) - 1) * [mpath.Path.LINETO]
+	bound_codes = [mpath.Path.MOVETO] + (len(bounds) - 1) * [mpath.Path.LINETO]
+	poly_codes = [mpath.Path.MOVETO] + (len(perimeter) - 1) * [mpath.Path.LINETO]
 
-    #plot masking patch
-    path = mpath.Path(bounds + perimeter, bound_codes + poly_codes)
-    patch = mpatches.PathPatch(path, facecolor='black', edgecolor='none')
-    patch = ax.add_patch(patch)
+	#plot masking patch
+	path = mpath.Path(bounds + perimeter, bound_codes + poly_codes)
+	patch = mpatches.PathPatch(path, facecolor='black', edgecolor='none')
+	patch = ax.add_patch(patch)
 
-    #reset plot limits to original
-    ax.set_xlim(xlim)
-    ax.set_ylim(ylim)
+	#reset plot limits to original
+	ax.set_xlim(xlim)
+	ax.set_ylim(ylim)
 
-    return patch
+	return patch
 
 #TODO
 #def bubble_presence():
@@ -168,20 +168,20 @@ def rgb_array_addition(redArr, greenArr, blueArr):
 
 
 def show_images(images,titles=None):
-    """Display a list of images"""
-    n_ims = len(images)
-    if titles is None: titles = ['(%d)' % i for i in range(1,n_ims + 1)]
-    fig = plt.figure()
-    n = 1
-    for image,title in zip(images,titles):
-        a = fig.add_subplot(1,n_ims,n)
-        if image.ndim == 2:
-            plt.gray()
-        plt.imshow(image)
-        a.set_title(title)
-        n += 1
-    fig.set_size_inches(np.array(fig.get_size_inches()) * n_ims)
-    plt.show()
+	"""Display a list of images"""
+	n_ims = len(images)
+	if titles is None: titles = ['(%d)' % i for i in range(1,n_ims + 1)]
+	fig = plt.figure()
+	n = 1
+	for image,title in zip(images,titles):
+		a = fig.add_subplot(1,n_ims,n)
+		if image.ndim == 2:
+			plt.gray()
+		plt.imshow(image)
+		a.set_title(title)
+		n += 1
+	fig.set_size_inches(np.array(fig.get_size_inches()) * n_ims)
+	plt.show()
 
 
 def scale_image(numpyArray):
@@ -217,6 +217,6 @@ def save_image(numpyArray, outputFile):
 	return;
 
 if __name__ == '__main__':
-    main()
+	main()
 
 
