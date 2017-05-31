@@ -4,7 +4,8 @@ except ImportError:
 	import tkinter as tk
 
 
-import hearing_test as ht
+import hearing_test_demo as htd
+import plotdata as pd
 # import image_processing_funcs as ipf
 # import camera as cam 						#UNCOMMENT
 # import bulging_shah
@@ -16,8 +17,8 @@ class Panel:
 
 	def __init__(self):
 		self.tk = master = tk.Tk()
-		self.images = [] #initialize to empty array. Add paths of each capture?
 		self.temp = 0.0
+		self.path = 'timedata.txt'
 
 		w = tk.Label(master, text="EAR DIAGNOSTICS", font=("Helvetica", 25), highlightbackground='#0f0684')
 		w.pack()
@@ -87,13 +88,14 @@ class Panel:
 
 	def print_hearing(self):
 		print("Adminstering hearing test.")
-		ht.hearing_test()
+		htd.hearing_test_demo()
 		print("Done.")
 		return
 
 	def enter_temperature(self):
 		temp = float(input("Enter the patient ear temperature in C:"))
 		self.temp = temp
+		print("Temperature recorded.")
 		return temp
 
 	def print_feed(self):
@@ -104,19 +106,15 @@ class Panel:
 
 	def print_read(self):
 		print("Reading data file.")
-		# TODO: import dath from file with correct typing for plotting
-		print("Done.")
-		#return some value?
-
-	def print_plot(self):
-		print("Creating plot.")
-		# TODO: call plotting function
+		self.path = input("Enter the file path:")
 		print("Done.")
 		return
 
-	def enter_path(self):
-		path = input("Enter the file path:")
-		return path
+	def print_plot(self):
+		print("Creating plot.")
+		pd.plotting(self.path)
+		print("Done.")
+		return
 
 	def print_redness(self):
 		print("Calculating redness.")
