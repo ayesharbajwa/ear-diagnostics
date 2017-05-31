@@ -1,13 +1,12 @@
 #####copied from https://github.com/eldor4do/TensorFlow-Examples/blob/master/retraining-example.py  and then changed by ME ########
 
-
+import redness as rd
 import numpy as np
 import tensorflow as tf
 
 imagePath = './ear_OME/OME12.jpg'
 modelFullPath = './cnn_graphs/output_graph.pb'
 labelsFullPath = './cnn_graphs/output_labels.txt'
-
 
 def create_graph():
     """Creates a graph from saved GraphDef file and returns a saver."""
@@ -41,8 +40,8 @@ def run_inference_on_image(img):
         for node_id in top_k:
             human_string = labels[node_id]
             score = predictions[node_id]
-            print('Probability of %s = %.5f' % (human_string, score))
-            if 'AOM' in human_string:
+            #print('Probability of %s = %.5f' % (human_string, score))
+            if 'NORMAL' in human_string:
                 answer1=score
 
         answer = labels[top_k[0]]
@@ -50,6 +49,10 @@ def run_inference_on_image(img):
 
 
 if __name__ == '__main__':
-    for i in range (4):
+    prob_AOM=[]
+    red=[]
+    for i in range (35):
         imagePath='./ear_AOM/AOM{}.jpg'.format(i+1)
-        run_inference_on_image(imagePath)
+
+    print(red)
+    print(prob_AOM)
