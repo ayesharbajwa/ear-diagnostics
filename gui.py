@@ -24,7 +24,7 @@ class Panel:
 		w = tk.Label(master, text="EAR DIAGNOSTICS", font=("Helvetica", 25), highlightbackground='#0f0684')
 		w.pack()
 
-		x = tk.Label(master, text="Welcome to our GUI.", font=("Helvetica", 20))
+		x = tk.Label(master, text="Welcome to the GUI, our works-like prototype.", font=("Helvetica", 20))
 		x.pack()
 
 		self.quit = tk.Button(master, text="QUIT", font=("Helvetica", 15), highlightbackground='#252526', command=master.quit)
