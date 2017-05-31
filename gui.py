@@ -6,6 +6,7 @@ except ImportError:
 
 import hearing_test_demo as htd
 import plotdata as pd
+import audiogram as ad
 # import image_processing_funcs as ipf
 # import camera as cam 						#UNCOMMENT
 # import bulging_shah
@@ -25,6 +26,7 @@ class Panel:
 
 		x = tk.Label(master, text="Welcome to our GUI.", font=("Helvetica", 20))
 		x.pack()
+
 		self.quit = tk.Button(master, text="QUIT", font=("Helvetica", 15), highlightbackground='#252526', command=master.quit)
 		self.quit.pack(pady=8, padx=15)
 
@@ -143,7 +145,7 @@ class Panel:
 
 	def print_audiogram(self):
 		print("Displaying audiogram.")
-		# TODO call
+		ad.audiogram()
 		return
 
 	def print_label_as(self, str):

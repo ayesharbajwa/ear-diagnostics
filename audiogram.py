@@ -1,6 +1,7 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import matplotlib
+matplotlib.use("TkAgg")
+from matplotlib import pyplot as plt
 
 def audiogram():
 	x = [250.0,500.0,1000.0,2000.0,4000.0,8000.0];
@@ -27,7 +28,7 @@ def audiogram():
 	matplotlib.rcParams.update({'font.size': 18})
 	plt.show()
 
-	fig.savefig('audiogram.png')
+	#fig.savefig('audiogram.png')
 
 if __name__ == "__main__":
 	audiogram()
