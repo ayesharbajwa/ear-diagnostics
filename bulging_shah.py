@@ -43,7 +43,7 @@ def tilt_calc():
 	
 	
 img=cv2.imread('./ear_AOM/AOM1.jpg',0)	
-#img=cv2.imread('./ear_normal/NORMAL1.jpg',0)
+img=cv2.imread('./ear_normal/NORMAL13.jpg',0)
 #img = cv2.resize(img, (300,300))
 
 img = img.astype(np.float32, copy=False)

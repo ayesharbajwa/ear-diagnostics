@@ -39,7 +39,7 @@ def tilt_calc():
 print('Available files:')	
 os.system('cd ear_AOM ; ls')
 print('Input file:')
-filename='./ear_AOM/{}'.format(input())
+filename='./ear_normal/{}'.format(input())
 img=cv2.imread(filename,0)
 img = img.astype(np.float32, copy=False)
 img=img/np.amax(img)
