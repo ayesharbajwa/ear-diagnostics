@@ -1,13 +1,15 @@
 import datetime as dt
-import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
+import matplotlib
+matplotlib.use("TkAgg")
+from matplotlib import pyplot as plt
+from matplotlib import dates as mdates
+from matplotlib.widgets import CheckButtons, Slider
 import numpy as np
 import csv
-from matplotlib.widgets import CheckButtons, Slider
 
+datafile='timedata.txt'
 
-def plotting():
-	datafile='timedata.txt'
+def plotting(datafile):
 	f=open(datafile,'r')
 	a=csv.reader(f,delimiter=',')
 	datelist,redness,bulging,temp=zip(*a)
@@ -44,6 +46,7 @@ def plotting():
 	plt.show()
 	plt.gcf().autofmt_xdate()
 	
+	
 if __name__ == "__main__":
-	plotting()
+	plotting(datafile)
 
