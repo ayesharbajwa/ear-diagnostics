@@ -21,8 +21,8 @@ def play_sound(f,v):
 	stream.close()
 	p.terminate()
 
-def hearing_test():
-	"""Takes user input and turns it into a boolean matrix"""
+def hearing_test_one_ear():
+	"""Takes user input and turns it into a list of hearing thresholds"""
 	freq=[250,500,1000,2000,4000,8000]#[250,500,1000,2000,4000,8000]      #frequencies tested
 	vol_tests=5
 	startvol=0.5
@@ -46,8 +46,14 @@ def hearing_test():
 				vol=vol-delta
 			else:
 				vol=vol+delta
-			print("vol=",vol)
 		canhear[0,f]=canhearvol
+	print("Your thresholds for frequencies ",freq," were, respectively, ",canhear)
 
+def hearing_test():
+	print("Testing your left ear. Please use the earbud only in this ear")
+	hearing_test_one_ear()
+	print("Testing your right ear. Please use the earbud only in this ear")
+	hearing_test_one_ear()
+	
 if __name__ == "__main__":
 	hearing_test()
