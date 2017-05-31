@@ -25,15 +25,16 @@ class Panel:
 
 		x = tk.Label(master, text="Welcome to our GUI.", font=("Helvetica", 20))
 		x.pack()
-		self.quit = tk.Button(master, text="QUIT", font=("Helvetica", 15), highlightbackground='#3E4149', command=master.quit)
+		self.quit = tk.Button(master, text="QUIT", font=("Helvetica", 15), highlightbackground='#252526', command=master.quit)
 		self.quit.pack(pady=8, padx=15)
+
 
 
 
 		frame = tk.Frame(master)
 		frame.pack(side=tk.LEFT)
 
-		a = tk.Label(frame, text="Basic Functions", font=("Helvetica", 18))
+		a = tk.Label(frame, text="Basic Device Functions", font=("Helvetica", 18))
 		a.pack()
 
 		self.hearing_test = tk.Button(frame, text="Hearing Test", font=("Helvetica", 15), highlightbackground='#2981ce', command=lambda: self.print_hearing())
@@ -47,10 +48,32 @@ class Panel:
 
 
 
+
+		frame3 = tk.Frame(master)
+		frame3.pack(side=tk.RIGHT)
+
+		c = tk.Label(frame3, text="Add Clinical Data", font=("Helvetica", 18))
+		c.pack()
+
+		self.addNormal = tk.Button(frame3, text="Label as Normal", font=("Helvetica", 15), highlightbackground='#206045', command=lambda: self.print_label_as("NORMAL"))
+		self.addNormal.pack(pady=8, padx=15)
+
+		self.addAOM = tk.Button(frame3, text="Label as AOM", font=("Helvetica", 15), highlightbackground='#206045', command=lambda: self.print_label_as("AOM"))
+		self.addAOM.pack(pady=8, padx=15)
+
+		self.addOME = tk.Button(frame3, text="Label as OME", font=("Helvetica", 15), highlightbackground='#206045', command=lambda: self.print_label_as("OME"))
+		self.addOME.pack(pady=8, padx=15)
+
+		self.cf = tk.Button(frame3, text="Update Classifier", font=("Helvetica", 15), highlightbackground='#206045', command=lambda: self.print_retrain())
+		self.cf.pack(pady=8, padx=15)
+
+
+
+
 		frame2 = tk.Frame(master)
 		frame2.pack(side=tk.RIGHT)
 
-		b = tk.Label(frame2, text="Plotting", font=("Helvetica", 18))
+		b = tk.Label(frame2, text="Plotting Saved Data", font=("Helvetica", 18))
 		b.pack()
 
 		self.read = tk.Button(frame2, text="Read Data File", font=("Helvetica", 15), highlightbackground='#0f0684', command=lambda: self.print_read())
@@ -59,25 +82,28 @@ class Panel:
 		self.plot = tk.Button(frame2, text="Display Plot", font=("Helvetica", 15), highlightbackground='#0f0684', command=lambda: self.print_plot())
 		self.plot.pack(pady=8, padx=15)
 
+		self.audiogram = tk.Button(frame2, text="Display Saved Audiogram", font=("Helvetica", 15), highlightbackground='#0f0684', command=lambda: self.print_audiogram())
+		self.audiogram.pack(pady=8, padx=15)
 
 
 
-		frame3 = tk.Frame(master)
-		frame3.pack(side=tk.RIGHT)
 
-		c = tk.Label(frame3, text="Image Processing", font=("Helvetica", 18))
-		c.pack()
+		frame4 = tk.Frame(master)
+		frame4.pack(side=tk.RIGHT)
 
-		#self.path = tk.Button(frame3, text="Enter Image File Path", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.enter_path())
+		d = tk.Label(frame4, text="Image Processing", font=("Helvetica", 18))
+		d.pack()
+
+		#self.path = tk.Button(frame3, text="Enter Image File Path", font=("Helvetica", 15), highlightbackground='#81e8a9', command=lambda: self.enter_path())
 		#self.path.pack(pady=8, padx=15)
 
-		self.red = tk.Button(frame3, text="Analyse Redness", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_redness())
+		self.red = tk.Button(frame4, text="Analyse Redness", font=("Helvetica", 15), highlightbackground='#81e8a9', command=lambda: self.print_redness())
 		self.red.pack(pady=8, padx=15)
 
-		#self.bulge = tk.Button(frame3, text="Analyse Bulging", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_bulge())
+		#self.bulge = tk.Button(frame3, text="Analyse Bulging", font=("Helvetica", 15), highlightbackground='#81e8a9', command=lambda: self.print_bulge())
 		#self.bulge.pack(pady=8, padx=15)
 
-		self.cf = tk.Button(frame3, text="Classify", font=("Helvetica", 15), highlightbackground='#174854', command=lambda: self.print_classify())
+		self.cf = tk.Button(frame4, text="Run Classifier", font=("Helvetica", 15), highlightbackground='#81e8a9', command=lambda: self.print_classify())
 		self.cf.pack(pady=8, padx=15)
 
 
@@ -111,9 +137,21 @@ class Panel:
 		return
 
 	def print_plot(self):
-		print("Creating plot.")
+		print("Displaying plot.")
 		pd.plotting(self.path)
-		print("Done.")
+		return
+
+	def print_audiogram(self):
+		print("Displaying audiogram.")
+		# TODO call
+		return
+
+	def print_label_as(self, str):
+		print("Image labelled as " + str + " tympanic membrane.")
+		return
+
+	def print_retrain(self, str):
+		print("Retraining CNN with new labelled data.")
 		return
 
 	def print_redness(self):
@@ -131,7 +169,7 @@ class Panel:
 		return
 
 	def print_classify(self):
-		print("Classiying...")
+		print("Classiying image...")
 		path = './saved_images/image.jpg'
 		#cf.run_inference_on_image(path)	#UNCOMMENT
 		print("Done.")
