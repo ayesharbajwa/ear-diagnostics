@@ -9,9 +9,9 @@ import random
 
 #read in original image from which to create noisy images
 
-for num in range(70):
+for num in range(36):
 
-	path = './ear_normal_square/NORMAL' + str(num) + '.jpg'
+	path = './ear_AOM_square/AOM' + str(num) + '.jpg'
 	orig = read_image(path)
 
 	for i in range(5):
@@ -33,4 +33,4 @@ for num in range(70):
 		"""
 
 		#save noisy image
-		save_image(new, './noisy_ear_normal_square/noisy' + str(num) + '-' + str(i) + '.jpg')
+		save_image(new, './noisy_ear_AOM_square/noisy' + str(num) + '-' + str(i) + '.jpg')
